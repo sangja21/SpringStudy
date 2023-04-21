@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "sqlQuery">
+
+    <select id ="select_NewTable" resultType = "modeling2.New_table">
+	select * from New_table;
+	</select>
+	
+	<insert id="insert_NewTable" parameterType = "modeling2.New_table">
+	insert INTO new_table(`title`, `content`, `code`) values(#{title}, #{content}, #{code}); 
+	</insert>
+	
+	<delete id="delete_NewTable" parameterType = "Integer">
+	delete from new_table where num = #{no};
+	</delete>
+
+</mapper>
