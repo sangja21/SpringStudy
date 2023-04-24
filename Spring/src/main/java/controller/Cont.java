@@ -104,5 +104,11 @@ public class Cont {
 		return "redirect:/s";
 	} // delRe
 	
+	@RequestMapping("/l")
+	public String login() {
+		
+		return "/WEB-INF/login.jsp";
+	} // login();
+	
 	
 } // Class Cont

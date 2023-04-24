@@ -65,6 +65,7 @@ background-color: rgba(0,0,0,0.1);
 </table>
 
 <a href="i" id="btn">글 작성</a>
+<a href="l" id="btn">로그인</a>
 
 </body>
 </html>
