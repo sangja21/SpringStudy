@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import actionSvc.DataOperation;
 import modeling2.New_table;
+import modeling2.member;
 
 @Service
 public class Svc {
@@ -30,5 +31,11 @@ public class Svc {
 		dy.delete2(no);
 	} // svcDelete
 	
+	public String svcLogin(member login) {
+		
+		String loginId = dy.login(login);
+
+		return loginId;
+	} // svcLogin
 
 }

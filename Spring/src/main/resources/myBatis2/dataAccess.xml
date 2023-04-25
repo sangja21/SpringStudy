@@ -16,5 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete_NewTable" parameterType = "Integer">
 	delete from new_table where num = #{no};
 	</delete>
+	
+	<select id="login" resultType="modeling2.member">
+	select * from member where id = #{id};
+	</select>
 
 </mapper>

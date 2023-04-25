@@ -1,8 +1,6 @@
 package actionSvc;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +10,8 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import modeling2.New_table;
+import modeling2.member;
 
 
 @Repository
@@ -165,5 +163,26 @@ public class DataOperation {
 		sql.delete("delete_NewTable", no);
 
 	} // method delete
+	
+	public String login(member login) {
+		member mem = new member();
+		String loginId = "/fail";
+		
+		mem = sql.selectOne("login", login);
+		
+		if(mem == null) { System.out.println("로그인에 실패하였습니다."); 
+		
+		} else if(mem.getPw().equals(login.getPw())) {
+			System.out.println("로그인에 성공하였습니다.");
+			loginId = login.getId();
+			
+		} else {  System.out.println("비밀번호가 틀렸습니다."); 
+			
+		}
+	
+		return loginId;
+	} // login
+	
+
 	
 } // class
