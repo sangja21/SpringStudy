@@ -3,6 +3,7 @@ package controller;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,6 @@ public class Cont {
 		mo.addAttribute("array", arr); 
 		//key-value의 형태
 		
-		
 		return "/WEB-INF/view.jsp";
 	}
 	
@@ -101,18 +101,29 @@ public class Cont {
 		return "redirect:/s";
 	} // request // redirect라고 하면 새로고침이 됨.
 	
-	@RequestMapping("del")
-	public String delRequest(HttpServletRequest request, @RequestParam Integer no, String id, String code) {
-		//new DataOperation().delete2(no);
+	@RequestMapping(value="/del2", method=RequestMethod.GET)
+	public String delRequest(HttpServletRequest request, @RequestParam Integer no) {
 		
-		if(id.equals(code)) {
+		New_table one = new New_table();
+		// 게시글의 번호만을 조회해서 글내용을 담아둘 객체 생성
+		one = sv.svcSelectPost(no);
+		// 게시글의 번호에 해당하는 내용을 아까 생성한 객체에 저장함
+		
+		String writer = one.getCode();
+		// 해당 게시글의 저자의 값을 Writer안에 담아둠
+		
+		HttpSession session = request.getSession();
+	    String loginId = (String) session.getAttribute("loginId");
+	    // session에서 로그인 된 사용자의 ID 값을 가져옴.
+		
+		if(writer.equals(loginId)) {
 			sv.svcDelete(no);
+			session.setAttribute("errorMessage", "삭제 되었습니다!");
 		} else {
-			System.out.println("안돼, 돌아가!");
-			request.setAttribute("errorMessage", "삭제할 수 없습니다.");
+			session.setAttribute("errorMessage", "삭제할 수 없습니다.");
 		}
 		
-		return "/s";
+		return "redirect:/s";
 	} // delRe
 	
 	@RequestMapping("/l")
@@ -133,13 +144,30 @@ public class Cont {
 		return "/WEB-INF/login-result.jsp";
 	} // request // redirect라고 하면 새로고침이 됨.
 	
-	
+	//@RequestMapping("logout")
     @RequestMapping(value ="/logout", method = RequestMethod.GET)
-    public String removeSessionValue(Model model, SessionStatus sessionStatus) {
+    public String removeSessionValue(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
         // 세션에서 loginId 속성을 제거합니다. logout의 역할을 수행합니다.
         sessionStatus.setComplete();
+        HttpSession session = request.getSession();
+        session.setAttribute("errorMessage", "로그아웃 되었습니다!");
 
 	    return "redirect:/s";
 	} // removeSessionValue
+    
+    @RequestMapping(value ="/dp", method = RequestMethod.GET)
+	public String detailPageView (HttpServletRequest request, Model mo, @RequestParam Integer no) {
+		// 게시글의 상세페이지로 이동하는 메서드
+		
+		New_table one = new New_table();
+		
+		one = sv.svcSelectPost(no);
+		
+		mo.addAttribute("onePost", one); 
+		
+		return "/WEB-INF/detail_page.jsp";
+	} // basic
+    
+    
 	 
 } // Class Cont

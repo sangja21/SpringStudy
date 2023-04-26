@@ -37,5 +37,14 @@ public class Svc {
 
 		return loginId;
 	} // svcLogin
+	
+	public New_table svcSelectPost(Integer no) {
+		
+		New_table one = new New_table();
+		
+		one = dy.selectPost(no);
+		
+		return one;
+	} //svcDp
 
 }

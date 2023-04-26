@@ -27,6 +27,24 @@ margin: 0 auto;
 
 }
 
+h1 {
+
+text-align: center;
+
+}
+
+p {
+
+text-align: center;
+
+}
+
+a {
+display: block;
+text-align: center;
+
+}
+
 </style>
 
 </head>
@@ -39,7 +57,7 @@ margin: 0 auto;
 
 <c:choose>
     <c:when test="${login != '/fail' && login != null}">
-        <h1> Hello! ${login}! <br> Welcome to Peaky fokin Blinders! </h1>
+        <h1> Hello! ${login}! <br> Welcome to <br> Peaky fokin Blinders! </h1>
     </c:when>
     <c:otherwise>
         <h1>Hey! you fail the Login!  </h1>

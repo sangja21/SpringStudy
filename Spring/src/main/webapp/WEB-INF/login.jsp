@@ -10,18 +10,15 @@
 
 
 body {
-
-width: 226px;
+width: 300px;
 margin: 0 auto;
-
 }
 
 #btn {
-
 display: block;
-padding: 10px 15px;
+width: 100%;
+height: 40px;
 background-color: rgba(0,0,0,0.2);
-margin: 20px;
 color: #333;
 text-decoration: none;
 font-weight: 700;
@@ -29,11 +26,29 @@ border-radius: 10px;
 transition: ease-out .1s;
 text-align: center;
 border: none;
+margin-top: 20px;
 }
 
 #btn:hover {
 
 background-color: rgba(0,0,0,0.1);
+
+}
+
+h1 {
+
+text-align: center;
+
+}
+
+table {
+width: 100%;
+
+}
+
+input {
+
+width: 95%;
 
 }
 

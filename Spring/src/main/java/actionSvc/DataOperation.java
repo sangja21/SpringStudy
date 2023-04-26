@@ -183,6 +183,15 @@ public class DataOperation {
 		return loginId;
 	} // login
 	
+	public New_table selectPost(Integer no) {
+		
+		New_table one = new New_table();
+		
+		one = sql.selectOne("onePost", no);
+		
+		return one;
+	} // selectOne
+	
 
 	
 } // class

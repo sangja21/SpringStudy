@@ -20,5 +20,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="login" resultType="modeling2.member">
 	select * from member where id = #{id};
 	</select>
+	
+	<select id="onePost" resultType="modeling2.New_table">
+	select * from new_table where num = #{num};
+	</select>
 
 </mapper>

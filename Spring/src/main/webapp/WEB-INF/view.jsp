@@ -21,16 +21,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-    <c:if test="${not empty errorMessage}">
-        <script>
-            alert('${errorMessage}');
-        </script>
-    </c:if>
+<c:if test="${not empty sessionScope.errorMessage}">
+    <script>
+        alert('${sessionScope.errorMessage}');
+    </script>
+    <% session.removeAttribute("errorMessage"); %>
+</c:if>
 
 <style type="text/css">
 
 body {
-	width: 500px;
+	width: 660px;
 	margin: 0 auto;
 }
 
@@ -39,12 +40,21 @@ text-align: center;
 
 }
 
-#btn {
+table {
+
+width: 650px;
+margin: 0 auto;
+
+}
+
+.btn {
 
 display: block;
-padding: 10px 15px;
+width: 100%;
+height: 30px;
+line-height: 30px;
+margin-top: 20px;
 background-color: rgba(0,0,0,0.2);
-margin: 20px 200px;
 color: #333;
 text-decoration: none;
 font-weight: 700;
@@ -53,7 +63,7 @@ transition: ease-out .1s;
 text-align: center;'
 }
 
-#btn:hover {
+.btn:hover {
 
 background-color: rgba(0,0,0,0.1);
 
@@ -62,6 +72,32 @@ background-color: rgba(0,0,0,0.1);
 .hidden {
 
 display: none;
+
+}
+
+a {
+
+text-decoration: none;
+color: #333;
+
+}
+
+a:hover {
+
+color: #999;
+text-decoration: underline;
+
+}
+
+td {
+
+text-align: center;
+
+}
+
+.title {
+
+font-weight: 700;
 
 }
 
@@ -81,35 +117,35 @@ display: none;
     </c:otherwise>
 </c:choose>
 
-
 <table border="1">
-
+<tr>
+<th class="title">num</th>
+<td class="title">Title</td>
+<td class="title">Writer</td>
+<td class="title">time</td>
+</tr>
 <c:forEach items="${array}" var = "i">
 <tr> 
-<th> ${i.title} </th>
-<td> ${i.content} </td>
+<th>${i.num}</th>
+<td> <a href="dp?no=${i.num}"> ${i.title} </a></td>
+<!--   <td> <a href="del?no=${i.num}&id=${sessionScope.loginId}&code=${i.code}" onclick="deleteBtn">삭제</a></td> -->
+<td> ${i.code} </td>
 <td> ${i.date} </td>
-<td> <a href="del?no=${i.num}&id=${sessionScope.loginId}&code=${i.code}" onclick="deleteBtn">삭제</a></td>
-<td class="hidden"> ${i.code} </td>
 </tr>
 </c:forEach>
 
 </table>
 
 <c:if test="${sessionScope.loginId != null}">
-<a href="i" id="btn">글 작성</a>
+<a href="i" class="btn">글 작성</a>
 </c:if>
-
-
-
-
 
 <c:choose>
     <c:when test="${sessionScope.loginId != null}">
-        <a href="logout" id="btn">로그아웃</a>
+        <a href="logout" class="btn">로그아웃</a>
     </c:when>
     <c:otherwise>
-        <a href="l" id="btn">로그인</a>
+        <a href="l" class="btn">로그인</a>
     </c:otherwise>
 </c:choose>
 
