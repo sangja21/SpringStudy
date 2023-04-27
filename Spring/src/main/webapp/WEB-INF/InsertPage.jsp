@@ -70,10 +70,11 @@ text-align: center;
 <body>
 
 <h1>Insert Page</h1>
-<form action="in" name="insert" method="post">
+<form action="in" name="insert" method="post" enctype="multipart/form-data">
 <table>
 <tr><td>Title : <input type="text" name="title" required></td></tr>
 <tr><td>Content : <input type="text" name="content" required></td></tr>
+<tr><td>attachment : <input type="file" name = "file" required> </td></tr>
 <tr><td>Writer : <input type="text" name="code" value="${sessionScope.loginId}" readonly></td></tr>
 <tr><td><input type="submit" value="등록" id="btn"></td></tr>
 </table>

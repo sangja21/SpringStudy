@@ -130,6 +130,7 @@ public class DataOperation {
 		
 	} // inser2 ver.MyBatis
 	
+	
 	/*
 	public void delete2(Integer no) {
 		// 삭제 메서드

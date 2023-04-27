@@ -1,10 +1,13 @@
 package controller;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest; 
 import javax.servlet.http.HttpSession;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import actionSvc.DataOperation;
 import modeling2.New_table;
@@ -46,6 +50,9 @@ public class Cont {
 	
 	@Autowired
 	Svc sv;
+	
+	// 파일을 저장할 디렉토리 경로 (insert 메서드에서 사용됨)
+    private static String UPLOAD_DIR = "uploads";
 	
 	@RequestMapping("/yo")
 	public String basic () {
@@ -87,16 +94,27 @@ public class Cont {
 	
 	@RequestMapping(value="/in", method=RequestMethod.POST)
 	public String request(@ModelAttribute New_table mo) {
+		// form태그에서 입력된 데이터를 데이터베이스에 입력하는 메서드.. 
 		// 넘겨받은 정보를 Model 객체의 형태로 받아온다는 뜻
 		// 만들어 놓은 객체의 모델링과 form태그 안에서 보내지는 데이터의 name의 이름이 일치하여야 한다.
-		//mo.getTitle();
-		//mo.getContent();
-		//mo.getCode();
 		
-		//System.out.println(mo.getTitle());
-		//Model drama = new Model();\
+        // 파일을 저장할 경로 생성
+        MultipartFile file = mo.getFile();
+        String filePath = UPLOAD_DIR + File.separator + file.getOriginalFilename();
 		
-		sv.svcInsert(mo);
+        System.out.println("파일 경로 : " + filePath);
+        
+		// 파일 저장
+        try {
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(filePath);
+            Files.write(path, bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        sv.svcInsert(mo);
+        // svc에 있는 Insert메서드를 호출
 		
 		return "redirect:/s";
 	} // request // redirect라고 하면 새로고침이 됨.

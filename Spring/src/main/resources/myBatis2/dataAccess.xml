@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insert_NewTable" parameterType = "modeling2.New_table">
-	insert INTO new_table(`title`, `content`, `code`) values(#{title}, #{content}, #{code}); 
+	insert INTO new_table(`title`, `content`, `code`, `file`) values(#{title}, #{content}, #{code}, #{file}); 
 	</insert>
 	
 	<delete id="delete_NewTable" parameterType = "Integer">

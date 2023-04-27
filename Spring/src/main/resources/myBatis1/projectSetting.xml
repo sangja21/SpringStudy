@@ -3,6 +3,11 @@
 
 <configuration>
 
+<typeHandlers>
+    <typeHandler handler="myBatisConfig.MultipartFileTypeHandler" javaType="org.springframework.web.multipart.MultipartFile" />
+    <!-- 기존에 있는 다른 타입 핸들러들 -->
+</typeHandlers>
+
 <mappers>
  <mapper resource="myBatis2/dataAccess.xml"/>
 </mappers>
