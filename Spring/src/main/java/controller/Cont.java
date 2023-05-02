@@ -68,7 +68,7 @@ public class Cont {
 	} // mongja
 	
 
-	@RequestMapping("/s")
+	@RequestMapping("/")
 	public String connect(Model mo) throws Exception{
 		
 		//ob.getTitle();
@@ -116,7 +116,7 @@ public class Cont {
         sv.svcInsert(mo);
         // svc에 있는 Insert메서드를 호출
 		
-		return "redirect:/s";
+		return "redirect:/";
 	} // request // redirect라고 하면 새로고침이 됨.
 	
 	@RequestMapping(value="/del2", method=RequestMethod.GET)
@@ -141,7 +141,7 @@ public class Cont {
 			session.setAttribute("errorMessage", "삭제할 수 없습니다.");
 		}
 		
-		return "redirect:/s";
+		return "redirect:/";
 	} // delRe
 	
 	@RequestMapping("/l")
@@ -170,7 +170,7 @@ public class Cont {
         HttpSession session = request.getSession();
         session.setAttribute("errorMessage", "로그아웃 되었습니다!");
 
-	    return "redirect:/s";
+	    return "redirect:/";
 	} // removeSessionValue
     
     @RequestMapping(value ="/dp", method = RequestMethod.GET)

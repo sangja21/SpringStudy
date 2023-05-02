@@ -64,7 +64,7 @@ text-align: center;
     </c:otherwise>
 </c:choose>
 
-<a href="s">Way Back Home</a>
+<a href=" ">Way Back Home</a>
 
 </body>
 </html>
